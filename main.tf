@@ -1,8 +1,12 @@
-module "rg" {
-    source = "./module"
-    rg_name = "simulator-rg"
-    rg_location = "South India"
-    tags = {
-      "Environment" = "Staging"
-    }
+resource "azurerm_resource_group" "resource_group" {
+  name     = var.rg_name
+  location = var.rg_location
+
+  tags = merge(
+    {
+        Name = var.rg_name
+        Provisioner = "Terraform"
+    },
+    var.tags
+  )
 }
